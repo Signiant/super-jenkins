@@ -1,0 +1,9 @@
+{
+  "masters": [
+    {
+      "name": "MASTER_NAME",
+      "endpoint": "http://MASTER_URL",
+      "icon": "http://MASTER_ICON"
+    }
+  ]
+}

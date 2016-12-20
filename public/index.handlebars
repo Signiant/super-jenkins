@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Super Jenkins</title>
+
+    <link href="assets/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="assets/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="assets/css/stylesheet.css" rel="stylesheet" />
+
+    <script src="assets/bower_components/angular/angular.js"></script>
+    <script src="assets/bower_components/jquery/dist/jquery.js"></script>
+    <script src="assets/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="assets/bower_components/fuse.js/src/fuse.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/controllers/SearchController.js"></script>
+    <script src="app/directives/JsonData.js"></script>
+  </head>
+
+  <body ng-app="superJenkins" ng-controller="SearchController">
+    <div id="main-nav" class="navbar">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <img class="logo-image" src="assets/img/logo.svg" alt="logo" title="Modification of artwork by Masanobu Imai for the Jenkins project (https://jenkins.io/)" />
+          <span class="logo-text">Super Jenkins</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid body-wrapper">
+      <div class="container-fluid search-container">
+        <input class="search-input" type="text" ng-model="searchText" ng-change="inputChanged()" placeholder="{[{ showPinned ?'search pinned jobs' : 'search all jobs'}]}"></input>
+        <i ng-class="showPinned ? 'fa-star' : 'fa-star-o'" ng-click="toggleShowPinned()" title="Toggle Pin View" class="search-toggle fa fa-3x"></i>
+      </div>
+
+      <div class="container result-container">
+        <table class="result-table">
+          <tr class="result-row" ng-repeat="job in results" ng-if="!showPinned || job.pinned">
+            <td class="result-master">
+              <img src="{[{ job.icon ? job.icon : 'assets/img/nologo.png' }]}" title="{[{ job.master }]}" alt="{[{ job.master[0].toUpperCase() }]}"></img>
+            </td>
+            <td class="result-name">
+              <a href="{[{job.url}]}" target="_blank">
+                {[{ job.name }]}
+              </a>
+            </td>
+            <td class="result-cached">
+              <i class="fa fa-exclamation-triangle fa-2x info-icon" ng-if="job.cached">
+                <span class="info-text">Unable to contact {[{ job.master }]}<br>He may be dead</span>
+              </i>
+            </td>
+            <td class="result-config">
+              <a href="{[{ job.url }]}configure" title="Configure" target="_blank">
+                <i class="fa fa-cog fa-2x"></i>
+              </a>
+            </td>
+            <td class="result-pin">
+              <i ng-class="job.pinned? 'fa-star' : 'fa-star-o'" title="Pin" class="fa fa-2x" ng-click="togglePin($index)"></i>
+            </td>
+          </tr>
+        </table>
+
+      </div>
+    </div>
+
+    <script type="application/json" json-data ng-model="jobs">{{{ jobs }}}</script>
+</html>
