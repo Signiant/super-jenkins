@@ -38,7 +38,7 @@
         <table class="result-table">
           <tr class="result-row" ng-repeat="job in results" ng-if="!showPinned || job.pinned">
             <td class="result-master">
-              <img ng-src="{[{ job.icon || 'assets/img/nologo.png' }]}" title="{[{ job.master }]}" alt="{[{ job.master[0].toUpperCase() }]}"></img>
+              <img ng-src="{[{ job.icon || 'assets/img/nologo.png' }]}" onerror="this.src='assets/img/nologo.png'" title="{[{ job.master }]}" alt="{[{ job.master[0].toUpperCase() }]}"></img>
             </td>
             <td class="result-name">
               <a href="{[{job.url}]}" target="_blank">
