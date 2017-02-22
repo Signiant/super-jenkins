@@ -20,6 +20,13 @@ angular.module('superJenkins').controller('SearchController', ['$scope', 'pinSto
       return 0;
     })
 
+    // Filter out jobs that appear in 3 or more masters (i.e. common template jobs)
+    for(var i = 0; i < $scope.results.length - 1; i++){
+      let count = 1;
+      while($scope.results[i].name == $scope.results[i + count].name) count++
+      if(count >= 3)  $scope.results.splice(i--, count);
+    }
+
     $scope.fuse = new Fuse($scope.jobs, {
       keys: ["name"],
       threshold: 0.3,
