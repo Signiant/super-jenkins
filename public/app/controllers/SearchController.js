@@ -30,8 +30,7 @@ angular.module('superJenkins').controller('SearchController', ['$scope', 'pinSto
     $scope.fuse = new Fuse($scope.jobs, {
       keys: ["name"],
       threshold: 0.3,
-      tokenize: true,
-      matchAllTokens: true
+      distance: 300
     });
   });
 
