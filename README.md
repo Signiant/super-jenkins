@@ -23,7 +23,8 @@ The Jenkins masters are configured in the config/masters.json file.
 The configuration file has one key, ``masters``, which holds a list of jenkins master configuration objects. Each jenkins master has three keys
   - name - The name of the server
   - endpoint - The base endpoint of the server
-  - icon - Link to an icon to display next to jobs from this master  
+  - icon - Link to an icon to display next to jobs from this master
+  - blueocean - set to true if you are using the Jenkins blueocean UI plugin
 
 Sample masters.json:
 ```
@@ -32,12 +33,14 @@ Sample masters.json:
     {
       "name": "Alfred",
       "endpoint": "http://alfred.your.domain.com",
-      "icon": "http://alfred.your.domain.com/userContent/logo.png"
+      "icon": "http://alfred.your.domain.com/userContent/logo.png",
+      "blueocean": false
     },
     {
       "name": "Banks",
       "endpoint": "http://banks.your.domain.com",
-      "icon": "http://banks.your.domain.com/userContent/logo.png"
+      "icon": "http://banks.your.domain.com/userContent/logo.png",
+      "blueocean": true
     }
   ]
 }
